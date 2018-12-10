@@ -1,6 +1,59 @@
 # ContextMenu
-vue-contextmenu 右键弹出菜单插件
+vue-contextmenu 右键弹出菜单插件  
 
+## 编者语
+
+简单的小插件，欢迎拷贝走，记得给个star！
+
+## 引用方法
+
+### 全局引入写法
+
+```js
+// main.js
+import Vue from 'vue;
+import { ContextMenu } from '@/plugins/ContextMenu';
+Vue.use(ContextMenu);
+```
+
+### 局部引入写法
+
+```vue
+<script>
+import { ContextMenu, ContextMenuDirective } from '@/plugins/ContextMenu';
+export default {
+    directives: {
+        // 引入指令式 指令式写法见下文
+        'v-contextmenu': ContextMenuDirective
+    },
+    methods: {
+        openMenu() {
+            // 引入函数式
+            ContextMenu({
+                event, // 传入鼠标事件
+                menu: [
+                    { icon: 'el-icon-view', name: this.$t('button.view'), action: 'view' },
+                    { icon: 'el-icon-edit', name: this.$t('button.edit'), action: 'edit' },
+                    { icon: 'el-icon-delete', name: this.$t('button.delete'), action: 'delete' }
+                ]
+            }).then(rs => {
+                switch (rs) {
+                    case 'view':
+                        this.viewFn();
+                        break;
+                    case 'edit':
+                        this.editFn();
+                        break;
+                    case 'delete':
+                        this.deleteFn();
+                        break;
+                }
+            });
+        }
+    }
+};
+</script>
+```
 
 ## 场景1 某个固定的元素需要右键点击菜单
 
@@ -11,6 +64,7 @@ vue-contextmenu 右键弹出菜单插件
     </div>
 </template>
 <script>
+// 以下两种场景均以全局引入方式引入
 export default {
     methods: {
         viewFn(event) {},
