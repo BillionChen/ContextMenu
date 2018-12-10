@@ -1,8 +1,6 @@
 import Vue from 'vue';
 import contextMenuVue from './main.vue';
-const isVNode = (node) => {
-  return node !== null && typeof node === 'object' && hasOwnProperty.call(node, 'componentOptions');
-};
+
 const ContextMenuConstructor = Vue.extend(contextMenuVue);
 let instance;
 const ContextMenu = function (options) {
@@ -39,7 +37,7 @@ const ContextMenu = function (options) {
       resolve(arguments[0]);
       remove();
     };
-    // instance.reject = reject;
+    // instance.reject = reject;// 这里不reject了，如果不点击则回传空字符串，不跑报错，简化写法
     document.body.appendChild(instance.$el);
     document.body.addEventListener('click', bodyClick);
     document.body.addEventListener('scroll', bodyClick);
@@ -54,10 +52,10 @@ const ContextMenuDirective = {
   }
 };
 
-ContextMenu.install = function (Vue) {
-  Vue.prototype.$ContextMenu = ContextMenu;
-  Vue.directive('Contextmenu', ContextMenuDirective);
+export default {
+  install: function (Vue) {
+    Vue.prototype.$ContextMenu = ContextMenu;
+    Vue.directive('Contextmenu', ContextMenuDirective);
+  }
 };
-
-export default ContextMenu;
-export { ContextMenu };
+export { ContextMenu, ContextMenuDirective };
