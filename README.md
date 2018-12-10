@@ -11,7 +11,7 @@ vue-contextmenu 右键弹出菜单插件
 
 ```js
 // main.js
-import Vue from 'vue;
+import Vue from 'vue';
 import { ContextMenu } from '@/plugins/ContextMenu';
 Vue.use(ContextMenu);
 ```
