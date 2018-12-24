@@ -170,3 +170,11 @@ export default {
 };
 </script>
 ```
+
+## 场景3 某个地方需要提前关闭菜单或者事件冒泡被阻止了需要手动关闭菜单
+
+```js
+import { ContextMenuClose } from '@/plugins/ContextMenu';
+// 上下文...
+ContextMenuClose(); // 调用关闭
+```
