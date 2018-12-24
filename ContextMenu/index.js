@@ -51,6 +51,9 @@ const ContextMenuDirective = {
     });
   }
 };
+const ContextMenuClose = function () {
+  if (instance) instance.resolve('');
+};
 
 export default {
   install: function (Vue) {
@@ -58,4 +61,4 @@ export default {
     Vue.directive('Contextmenu', ContextMenuDirective);
   }
 };
-export { ContextMenu, ContextMenuDirective };
+export { ContextMenu, ContextMenuDirective, ContextMenuClose };
