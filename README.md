@@ -1,5 +1,5 @@
 # ContextMenu
-vue-contextmenu 右键弹出菜单插件  
+vue-contextmenu 右键弹出菜单插件，新增加了无限子菜单功能。  
 
 ## 编者语
 
@@ -34,7 +34,20 @@ export default {
                 menu: [
                     { icon: 'el-icon-view', name: this.$t('button.view'), action: 'view' },
                     { icon: 'el-icon-edit', name: this.$t('button.edit'), action: 'edit' },
-                    { icon: 'el-icon-delete', name: this.$t('button.delete'), action: 'delete' }
+                    { icon: 'el-icon-delete', name: this.$t('button.delete'), action: 'delete',
+                        children: [
+                          {
+                            icon: 'el-icon-price-tag',
+                            name: '新增1',
+                            action: 'newMemoryTag',
+                          },
+                          {
+                            icon: 'el-icon-price-tag',
+                            name: '新增2',
+                            action: 'newExpressionTag',
+                          }
+                        ] 
+                    }
                 ]
             }).then(rs => {
                 switch (rs) {
