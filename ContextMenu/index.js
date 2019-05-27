@@ -3,7 +3,7 @@ import contextMenuVue from './main.vue';
 
 const ContextMenuConstructor = Vue.extend(contextMenuVue);
 let instance;
-const ContextMenu = function (options) {
+const ContextMenu = function(options) {
   try {
     let e = options.event;
     e.preventDefault();
@@ -11,17 +11,18 @@ const ContextMenu = function (options) {
     console.log(e);
   }
   if (Vue.prototype.$isServer) return;
-  return new Promise((resolve, reject) => {
-    const remove = function () {
+  return new Promise(resolve => {
+    const remove = function() {
       document.body.removeChild(instance.$el);
       document.body.removeEventListener('click', bodyClick);
       document.body.removeEventListener('scroll', bodyClick);
       instance = null;
     };
-    const bodyClick = function () {
+    const bodyClick = function() {
       instance.resolve('');
     };
-    if (instance) { // 如果还有上一个未关闭
+    if (instance) {
+      // 如果还有上一个未关闭
       instance.resolve('');
     }
     instance = new ContextMenuConstructor({
@@ -33,7 +34,7 @@ const ContextMenu = function (options) {
       instance.customEvent = options.event;
       instance.axis = { x: options.event.x, y: options.event.y };
     }
-    instance.resolve = function () {
+    instance.resolve = function() {
       resolve(arguments[0]);
       remove();
     };
@@ -46,17 +47,17 @@ const ContextMenu = function (options) {
 
 const ContextMenuDirective = {
   bind(el, binding) {
-    el.addEventListener('contextmenu', function (event) {
-      ContextMenu({event, menu: binding.value});
+    el.addEventListener('contextmenu', function(event) {
+      ContextMenu({ event, menu: binding.value });
     });
   }
 };
-const ContextMenuClose = function () {
+const ContextMenuClose = function() {
   if (instance) instance.resolve('');
 };
 
 export default {
-  install: function (Vue) {
+  install: function(Vue) {
     Vue.prototype.$ContextMenu = ContextMenu;
     Vue.directive('Contextmenu', ContextMenuDirective);
   }
