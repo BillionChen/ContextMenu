@@ -103,10 +103,11 @@ $menu-height: 30px;
   left: 0;
   border-radius: 5px;
   /*overflow: hidden;*/
-  border: 1px solid #ccc;
+  /*border: 1px solid #ccc;*/
   .contextmenu {
     margin: 0;
     box-shadow: 0 0 5px #ccc;
+    border: 1px solid #ccc;
   }
   .contextmenu__item {
     width: 155px;
@@ -140,8 +141,8 @@ $menu-height: 30px;
       }
       .contextmenu {
         position: absolute;
-        right: calc(-100% + 1px);
-        top: 0;
+        right: calc(-100% - 2px);
+        top: -1px;
         display: none;
       }
       &:hover {

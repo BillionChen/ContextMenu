@@ -25,7 +25,6 @@
 </template>
 
 <script>
-// import MenuItem from './MenuItem'
 export default {
   name: 'context-menu',
   props: {
@@ -69,6 +68,9 @@ export default {
   },
   methods: {
     fnHandler(item) {
+      if(item.children&&item.children.length>0){
+        return false;
+      }
       this.status = false;
       // if (item.fn) item.fn(this.customEvent);
       this.resolve(item.action);
@@ -84,7 +86,6 @@ export default {
     });
   },
   components: {
-    // MenuItem
   }
 };
 </script>
